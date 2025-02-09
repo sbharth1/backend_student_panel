@@ -5,27 +5,39 @@ import { dataConnection } from "../config/connect";
 export const login = async (req: Request, res: Response) => {
   await dataConnection();
   try {
+    await connectDB();
     const { email, password } = req.body;
-    if (!password || !email) {
-      res.status(404).json({
-        message: "email and password are invalid",
+    if (!email || !password) {
+      return res.status(400).json({
+        message: "email and password is invalid",
       });
     }
-
-    const user = User.find({ email });
-
+    const user = await User.findOne({ email });
     if (!user) {
-      res.status(404).json({
-        message: "Email and userName invalid",
+      return res.status(404).json({
+        message: "User not found",
       });
     }
 
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    if (!isPasswordCorrect) {
+      return res.status(401).json({
+        message: "Invalid password",
+      });
+    }
+    const token = generateToken(email);
     res.status(200).json({
-      message: "userName and email valid",
+      message: "Data fetched successfully",
+      token,
+      data: {
+        userName: user.userName,
+        email: user.email,
+      },
     });
-  } catch (err) {
-    res.status(404).json({
-      message: "err in login api",
+  } catch (error: any) {
+    res.status(500).json({
+      message: "Server Error",
+      error: error.message,
     });
   }
 };
