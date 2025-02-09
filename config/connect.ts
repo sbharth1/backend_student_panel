@@ -7,7 +7,7 @@ if (!MONGO_URL) {
   console.log("check the env mongodb url");
 }
 
-export async function dataConnection(){
+export async function dataBaseConnection(){
   mongoose
     .connect(MONGO_URL!)
     .then(() => {

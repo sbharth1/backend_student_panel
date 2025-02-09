@@ -1,11 +1,10 @@
 import { Request, Response } from "express";
 import User from "../models/studentLoginSchema";
-import { dataConnection } from "../config/connect";
+import { dataBaseConnection } from "../config/connect";
 
 export const login = async (req: Request, res: Response) => {
-  await dataConnection();
   try {
-    await connectDB();
+    await dataBaseConnection();
     const { email, password } = req.body;
     if (!email || !password) {
       return res.status(400).json({
