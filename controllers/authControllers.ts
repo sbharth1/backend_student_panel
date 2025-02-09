@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import User from "../models/studentLoginSchema";
+import bcrypt from 'bcryptjs'
 import { dataBaseConnection } from "../config/connect";
 
 export const login = async (req: Request, res: Response) => {
@@ -29,7 +30,6 @@ export const login = async (req: Request, res: Response) => {
       message: "Data fetched successfully",
       token,
       data: {
-        userName: user.userName,
         email: user.email,
       },
     });
