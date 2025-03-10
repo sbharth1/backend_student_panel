@@ -12,6 +12,9 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
+  active:{
+    type:Number,
+  }
 },
 {timestamps:true});
 
