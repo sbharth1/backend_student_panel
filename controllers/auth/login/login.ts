@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import User from "../models/studentLoginSchema";
-import { dataBaseConnection } from "../config/connect";
-import { generateToken } from "../utils/jwt";
+import User from "../../../models/studentLoginSchema";
+import { dataBaseConnection } from "../../../config/connect";
+import { generateToken } from "../../../utils/jwt";
 import bcrypt from 'bcryptjs'
 
 export const login = async (req: Request, res: Response) => {
