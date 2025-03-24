@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
-import User from "../../../models/studentLoginSchema";
-import { dataBaseConnection } from "../../../config/connect";
+import { dataBaseConnection } from "../../../db/config/connect";
 import { generateToken } from "../../../utils/jwt";
-import bcrypt from 'bcryptjs'
 
 export const login = async (req: Request, res: Response) => {
   try {
@@ -15,21 +13,7 @@ export const login = async (req: Request, res: Response) => {
       return;
     }
     
-    
-    const user = await User.findOne({ email });
-    if (!user) {
-     res.status(404).json({
-        message: "User not found",
-      });
-      return;
-    }
-    const isPasswordCorrect = await bcrypt.compare(password, user.password);
-    if (!isPasswordCorrect) {
-       res.status(401).json({
-        message: "Invalid password",
-      });
-      return;
-    }
+
 
     const token = generateToken(email);
     res.status(200).json({
