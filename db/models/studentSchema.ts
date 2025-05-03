@@ -1,13 +1,19 @@
 import { Schema, model } from "mongoose";
 import bcrypt from 'bcryptjs'
 
-interface Students {
-  email:string,
-  password:string,
-  active:number
+interface Students{
+  studentId:string;
+  email:string;
+  password:string;
+  active:number;
 }
 
 const userSchema = new Schema<Students>({
+  studentId:{
+    type:String,
+    require:true,
+    unique:true
+  },
   email: {
     type: String,
     required: true,
