@@ -12,8 +12,6 @@ export const login = async (req: Request, res: Response) => {
       });
       return;
     }
-    
-
 
     const token = generateToken(email);
     res.status(200).json({
