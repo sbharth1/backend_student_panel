@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
-
+import { customAlphabet } from "nanoid";
+const nanoid = customAlphabet("1234567890",5);
 interface Teachers {
   teacherId: string;
   teacherName: string;
@@ -12,16 +13,21 @@ const teacherSchema = new Schema<Teachers>(
     teacherId: {
       type: String,
       unique: true,
+      required: true,
+      default:()=> nanoid(5)
     },
     teacherName: {
       type: String,
+      required: true,
     },
     teacherSubject: {
       type: String,
+      required: true,
     },
     teacherNo: {
       type: String,
       unique: true,
+      required: true,
     },
   },
   {
@@ -29,6 +35,6 @@ const teacherSchema = new Schema<Teachers>(
   }
 );
 
-const Teacher = model("teacher",teacherSchema);
+const userTeacher = model("teacher", teacherSchema);
 
-export default Teacher;
+export default userTeacher;

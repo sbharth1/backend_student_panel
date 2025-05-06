@@ -10,18 +10,22 @@ const parentSchema = new Schema<Parents>(
   {
     fatherName: {
       type: String,
+      required:true,
     },
     motherName: {
       type: String,
+      required:true,
+
     },
     mobileNo: {
       type: String,
       unique: true,
+      required:true,
     },
   },
   { timestamps: true }
 );
 
-const Parent =  model("parent", parentSchema);
+const userParent =  model("parent", parentSchema);
 
-export default Parent;
+export default userParent;

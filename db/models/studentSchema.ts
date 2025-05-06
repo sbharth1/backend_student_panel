@@ -1,6 +1,7 @@
 import { Schema, Types, model } from "mongoose";
 import bcrypt from "bcryptjs";
-import {nanoid} from 'nanoid'
+import {customAlphabet} from 'nanoid'
+const nanoid = customAlphabet('1234567890',5);
 
 interface Students {
   studentId: string;
@@ -10,14 +11,13 @@ interface Students {
   parent: Types.ObjectId;
   teacher?: Types.ObjectId;
 }
-
 const userSchema = new Schema<Students>(
   {
     studentId: {
       type: String,
       required: true,
       unique: true,
-      default:()=> nanoid(5)
+      default:()=> nanoid()
     },
     email: {
       type: String,
@@ -32,7 +32,6 @@ const userSchema = new Schema<Students>(
     parent: {
       type: Schema.Types.ObjectId,
       ref: "Parent",
-      required: true,
     },
     teacher: {
       type: Schema.Types.ObjectId,
