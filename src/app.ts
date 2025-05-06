@@ -5,10 +5,12 @@ import router from "../routes/router";
 const app = express();
 dotenv.config();
 
+const CLIENT_URL = process.env.CLIENT_URL!;
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST"],
+    origin: `${CLIENT_URL}`,
+    methods: ["GET", "POST","PUT","DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );

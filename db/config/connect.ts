@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
-const connectDB  =  process.env.MONGO_URL!;
+const connectDB = process.env.MONGO_URL!;
 
 if (!connectDB) {
   console.log("check the env mongodb url");
