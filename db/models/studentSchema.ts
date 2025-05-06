@@ -1,21 +1,23 @@
 import { Schema, Types, model } from "mongoose";
 import bcrypt from "bcryptjs";
+import {nanoid} from 'nanoid'
 
 interface Students {
   studentId: string;
   email: string;
   password: string;
   active: number;
-  parent:Types.ObjectId;
-  teacher?:Types.ObjectId;
+  parent: Types.ObjectId;
+  teacher?: Types.ObjectId;
 }
 
 const userSchema = new Schema<Students>(
   {
     studentId: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
+      default:()=> nanoid(5)
     },
     email: {
       type: String,
@@ -27,19 +29,18 @@ const userSchema = new Schema<Students>(
       required: true,
       unique: true,
     },
-    parent:{
-     type:Schema.Types.ObjectId,
-     ref:"Parent",
-     required:true,
+    parent: {
+      type: Schema.Types.ObjectId,
+      ref: "Parent",
+      required: true,
     },
-    teacher:{
-    type:Schema.Types.ObjectId,
-    ref:"Teacher"
+    teacher: {
+      type: Schema.Types.ObjectId,
+      ref: "Teacher",
     },
     active: {
       type: Number,
     },
-
   },
   { timestamps: true }
 );
