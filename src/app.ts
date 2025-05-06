@@ -1,7 +1,7 @@
 import express, { urlencoded } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import router from "../routes/router";
+import router from "../routes/rotuer";
 const app = express();
 dotenv.config();
 
